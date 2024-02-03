@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "316075415534",
+    "project_id": "scgsos",
+    "storage_bucket": "scgsos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316075415534:android:6165f66f5669d6187a20ff",
+        "android_client_info": {
+          "package_name": "com.mobile.emergencysos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4DQkWST9ymCnjMGprLcT_h34AL7zSfX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316075415534:android:30e0c64e382374407a20ff",
+        "android_client_info": {
+          "package_name": "com.mobile.sos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4DQkWST9ymCnjMGprLcT_h34AL7zSfX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

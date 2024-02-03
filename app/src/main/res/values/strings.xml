@@ -1,0 +1,235 @@
+<resources>
+    <string name="app_name">Emergency SoS</string>
+    <string-array name="country_codes">
+        <item>+91 (India)</item>
+        <item>+1 (United States)</item>
+        <item>+93 (Afghanistan)</item>
+        <item>+355 (Albania)</item>
+        <item>+213 (Algeria)</item>
+        <item>+376 (Andorra)</item>
+        <item>+244 (Angola)</item>
+        <item>+1 (Anguilla)</item>
+        <item>+1 (Antigua and Barbuda)</item>
+        <item>+54 (Argentina)</item>
+        <item>+374 (Armenia)</item>
+        <item>+297 (Aruba)</item>
+        <item>+61 (Australia)</item>
+        <item>+43 (Austria)</item>
+        <item>+994 (Azerbaijan)</item>
+        <item>+1 (Bahamas)</item>
+        <item>+973 (Bahrain)</item>
+        <item>+880 (Bangladesh)</item>
+        <item>+1 (Barbados)</item>
+        <item>+375 (Belarus)</item>
+        <item>+32 (Belgium)</item>
+        <item>+501 (Belize)</item>
+        <item>+229 (Benin)</item>
+        <item>+1 (Bermuda)</item>
+        <item>+975 (Bhutan)</item>
+        <item>+591 (Bolivia)</item>
+        <item>+387 (Bosnia and Herzegovina)</item>
+        <item>+267 (Botswana)</item>
+        <item>+55 (Brazil)</item>
+        <item>+1 (British Virgin Islands)</item>
+        <item>+673 (Brunei)</item>
+        <item>+359 (Bulgaria)</item>
+        <item>+226 (Burkina Faso)</item>
+        <item>+257 (Burundi)</item>
+        <item>+855 (Cambodia)</item>
+        <item>+237 (Cameroon)</item>
+        <item>+1 (Canada)</item>
+        <item>+238 (Cape Verde)</item>
+        <item>+236 (Central African Republic)</item>
+        <item>+235 (Chad)</item>
+        <item>+56 (Chile)</item>
+        <item>+86 (China)</item>
+        <item>+57 (Colombia)</item>
+        <item>+269 (Comoros)</item>
+        <item>+243 (Congo, Democratic Republic of the)</item>
+        <item>+242 (Congo, Republic of the)</item>
+        <item>+506 (Costa Rica)</item>
+        <item>+225 (Cote d\'Ivoire)</item>
+        <item>+385 (Croatia)</item>
+        <item>+53 (Cuba)</item>
+        <item>+357 (Cyprus)</item>
+        <item>+420 (Czech Republic)</item>
+        <item>+45 (Denmark)</item>
+        <item>+253 (Djibouti)</item>
+        <item>+1 (Dominica)</item>
+        <item>+1 (Dominican Republic)</item>
+        <item>+593 (Ecuador)</item>
+        <item>+20 (Egypt)</item>
+        <item>+503 (El Salvador)</item>
+        <item>+240 (Equatorial Guinea)</item>
+        <item>+291 (Eritrea)</item>
+        <item>+372 (Estonia)</item>
+        <item>+251 (Ethiopia)</item>
+        <item>+500 (Falkland Islands)</item>
+        <item>+298 (Faroe Islands)</item>
+        <item>+679 (Fiji)</item>
+        <item>+358 (Finland)</item>
+        <item>+33 (France)</item>
+        <item>+594 (French Guiana)</item>
+        <item>+689 (French Polynesia)</item>
+        <item>+241 (Gabon)</item>
+        <item>+220 (Gambia)</item>
+        <item>+995 (Georgia)</item>
+        <item>+49 (Germany)</item>
+        <item>+233 (Ghana)</item>
+        <item>+350 (Gibraltar)</item>
+        <item>+30 (Greece)</item>
+        <item>+299 (Greenland)</item>
+        <item>+1 (Grenada)</item>
+        <item>+590 (Guadeloupe)</item>
+        <item>+1 (Guam)</item>
+        <item>+502 (Guatemala)</item>
+        <item>+224 (Guinea)</item>
+        <item>+245 (Guinea-Bissau)</item>
+        <item>+592 (Guyana)</item>
+        <item>+509 (Haiti)</item>
+        <item>+504 (Honduras)</item>
+        <item>+852 (Hong Kong)</item>
+        <item>+36 (Hungary)</item>
+        <item>+354 (Iceland)</item>
+        <item>+62 (Indonesia)</item>
+        <item>+98 (Iran)</item>
+        <item>+964 (Iraq)</item>
+        <item>+353 (Ireland)</item>
+        <item>+972 (Israel)</item>
+        <item>+39 (Italy)</item>
+        <item>+1 (Jamaica)</item>
+        <item>+81 (Japan)</item>
+        <item>+962 (Jordan)</item>
+        <item>+7 (Kazakhstan)</item>
+        <item>+254 (Kenya)</item>
+        <item>+686 (Kiribati)</item>
+        <item>+850 (North Korea)</item>
+        <item>+82 (South Korea)</item>
+        <item>+965 (Kuwait)</item>
+        <item>+996 (Kyrgyzstan)</item>
+        <item>+856 (Laos)</item>
+        <item>+371 (Latvia)</item>
+        <item>+961 (Lebanon)</item>
+        <item>+266 (Lesotho)</item>
+        <item>+231 (Liberia)</item>
+        <item>+218 (Libya)</item>
+        <item>+423 (Liechtenstein)</item>
+        <item>+370 (Lithuania)</item>
+        <item>+352 (Luxembourg)</item>
+        <item>+853 (Macao)</item>
+        <item>+389 (North Macedonia)</item>
+        <item>+261 (Madagascar)</item>
+        <item>+265 (Malawi)</item>
+        <item>+60 (Malaysia)</item>
+        <item>+960 (Maldives)</item>
+        <item>+223 (Mali)</item>
+        <item>+356 (Malta)</item>
+        <item>+692 (Marshall Islands)</item>
+        <item>+596 (Martinique)</item>
+        <item>+222 (Mauritania)</item>
+        <item>+230 (Mauritius)</item>
+        <item>+262 (Mayotte)</item>
+        <item>+52 (Mexico)</item>
+        <item>+691 (Micronesia)</item>
+        <item>+373 (Moldova)</item>
+        <item>+377 (Monaco)</item>
+        <item>+976 (Mongolia)</item>
+        <item>+382 (Montenegro)</item>
+        <item>+1 (Montserrat)</item>
+        <item>+212 (Morocco)</item>
+        <item>+258 (Mozambique)</item>
+        <item>+95 (Myanmar)</item>
+        <item>+264 (Namibia)</item>
+        <item>+674 (Nauru)</item>
+        <item>+977 (Nepal)</item>
+        <item>+31 (Netherlands)</item>
+        <item>+599 (Netherlands Antilles)</item>
+        <item>+687 (New Caledonia)</item>
+        <item>+64 (New Zealand)</item>
+        <item>+505 (Nicaragua)</item>
+        <item>+227 (Niger)</item>
+        <item>+234 (Nigeria)</item>
+        <item>+683 (Niue)</item>
+        <item>+672 (Norfolk Island)</item>
+        <item>+1 (Northern Mariana Islands)</item>
+        <item>+47 (Norway)</item>
+        <item>+968 (Oman)</item>
+        <item>+92 (Pakistan)</item>
+        <item>+680 (Palau)</item>
+        <item>+970 (Palestinian Territory)</item>
+        <item>+507 (Panama)</item>
+        <item>+675 (Papua New Guinea)</item>
+        <item>+595 (Paraguay)</item>
+        <item>+51 (Peru)</item>
+        <item>+63 (Philippines)</item>
+        <item>+48 (Poland)</item>
+        <item>+351 (Portugal)</item>
+        <item>+1 (Puerto Rico)</item>
+        <item>+974 (Qatar)</item>
+        <item>+262 (Reunion)</item>
+        <item>+40 (Romania)</item>
+        <item>+7 (Russia)</item>
+        <item>+250 (Rwanda)</item>
+        <item>+685 (Samoa)</item>
+        <item>+378 (San Marino)</item>
+        <item>+239 (Sao Tome and Principe)</item>
+        <item>+966 (Saudi Arabia)</item>
+        <item>+221 (Senegal)</item>
+        <item>+381 (Serbia)</item>
+        <item>+248 (Seychelles)</item>
+        <item>+232 (Sierra Leone)</item>
+        <item>+65 (Singapore)</item>
+        <item>+421 (Slovakia)</item>
+        <item>+386 (Slovenia)</item>
+        <item>+677 (Solomon Islands)</item>
+        <item>+252 (Somalia)</item>
+        <item>+27 (South Africa)</item>
+        <item>+211 (South Sudan)</item>
+        <item>+34 (Spain)</item>
+        <item>+94 (Sri Lanka)</item>
+        <item>+590 (Saint Barthelemy)</item>
+        <item>+290 (Saint Helena)</item>
+        <item>+1 (Saint Kitts and Nevis)</item>
+        <item>+1 (Saint Lucia)</item>
+        <item>+590 (Saint Martin)</item>
+        <item>+508 (Saint Pierre and Miquelon)</item>
+        <item>+1 (Saint Vincent and the Grenadines)</item>
+        <item>+249 (Sudan)</item>
+        <item>+597 (Suriname)</item>
+        <item>+268 (Swaziland)</item>
+        <item>+46 (Sweden)</item>
+        <item>+41 (Switzerland)</item>
+        <item>+963 (Syria)</item>
+        <item>+886 (Taiwan)</item>
+        <item>+992 (Tajikistan)</item>
+        <item>+255 (Tanzania)</item>
+        <item>+66 (Thailand)</item>
+        <item>+670 (Timor-Leste)</item>
+        <item>+228 (Togo)</item>
+        <item>+690 (Tokelau)</item>
+        <item>+676 (Tonga)</item>
+        <item>+1 (Trinidad and Tobago)</item>
+        <item>+216 (Tunisia)</item>
+        <item>+90 (Turkey)</item>
+        <item>+993 (Turkmenistan)</item>
+        <item>+1 (Turks and Caicos Islands)</item>
+        <item>+688 (Tuvalu)</item>
+        <item>+256 (Uganda)</item>
+        <item>+380 (Ukraine)</item>
+        <item>+971 (United Arab Emirates)</item>
+        <item>+44 (United Kingdom)</item>
+        <item>+598 (Uruguay)</item>
+        <item>+998 (Uzbekistan)</item>
+        <item>+678 (Vanuatu)</item>
+        <item>+39 (Vatican City)</item>
+        <item>+58 (Venezuela)</item>
+        <item>+84 (Vietnam)</item>
+        <item>+681 (Wallis and Futuna)</item>
+        <item>+967 (Yemen)</item>
+        <item>+260 (Zambia)</item>
+        <item>+263 (Zimbabwe)</item>
+    </string-array>
+    <string name="country_code_prompt">Select Country Code</string>
+
+
+</resources>
