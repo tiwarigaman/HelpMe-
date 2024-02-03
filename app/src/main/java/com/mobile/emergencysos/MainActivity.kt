@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -60,41 +61,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Register ValueEventListener
-//        val myWorkRequest = OneTimeWorkRequestBuilder<FirebaseWorker>().build()
-//        WorkManager.getInstance(this).enqueue(myWorkRequest)
-//        databaseReference.addValueEventListener(valueEventListener)
-//
-//        val filter = IntentFilter("database_change")
-//        registerReceiver(receiver, filter, RECEIVER_EXPORTED)
-
-
-//        val serviceIntent2 = Intent(this, MyForegroundService::class.java)
-//        startService(serviceIntent2)
-
         val serviceIntent = Intent(this, FirebaseService::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(serviceIntent)
         } else {
             startService(serviceIntent)
         }
-
     }
 
-    private fun showCustomNotification(message: String) {
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    @SuppressLint("LaunchActivityFromNotification")
+    private fun showCustomNotification(value: String?) {
+        // Create an explicit intent for a BroadcastReceiver in your app
+        val intent = Intent("com.mobile.emergencysos.POPUP_ACTION").apply {
+            putExtra("message", value) // Pass the message to the PopupReceiver
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        // Create NotificationCompat.Builder
-        val notificationBuilder = NotificationCompat.Builder(this, "channalid1")
+        val notification = NotificationCompat.Builder(this, "channelId")
+            .setContentTitle("Firebase Update")
+            .setContentText(value)
             .setSmallIcon(R.drawable.baseline_notification_24)
-            .setContentTitle("Simple Notification")
-            .setContentText(message)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent) // Set the intent that will fire when the user taps the notification
+            .setAutoCancel(true) // Automatically removes the notification when the user taps it
+            .build()
 
-        // Notify with a unique notification ID
-        notificationManager.notify(0, notificationBuilder.build())
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(2, notification)
+
     }
+
+
+
 
 
     private fun areNotificationsEnabled(): Boolean {

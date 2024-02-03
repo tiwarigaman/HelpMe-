@@ -3,11 +3,13 @@ package com.mobile.emergencysos
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.database.*
 
@@ -34,7 +36,8 @@ class FirebaseService : Service() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(String::class.java)
-                showNotification(value)
+                Log.d("FirebaseService", "Received value from Firebase: $value")
+                showCustomNotification(value)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -58,14 +61,35 @@ class FirebaseService : Service() {
         }
     }
 
-    private fun showNotification(value: String?) {
+    @SuppressLint("LaunchActivityFromNotification")
+    private fun showCustomNotification(value: String?) {
+        // Create an explicit intent for a BroadcastReceiver in your app
+        Log.d("FirebaseService", "showCustomNotification called with value: $value")
+
+        if (value.isNullOrEmpty()) {
+            Log.d("FirebaseService", "Value from Firebase is null or empty.")
+            return
+        }
+        val intent = Intent("com.mobile.emergencysos.POPUP_ACTION").apply {
+            putExtra("message", value) // Pass the message to the PopupReceiver
+        }
+
+        // Add FLAG_IMMUTABLE to the PendingIntent
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
         val notification = NotificationCompat.Builder(this, "channelId")
             .setContentTitle("Firebase Update")
             .setContentText(value)
             .setSmallIcon(R.drawable.baseline_notification_24)
+            .setContentIntent(pendingIntent) // Set the intent that will fire when the user taps the notification
+            .setAutoCancel(true) // Automatically removes the notification when the user taps it
             .build()
 
+
+        Log.d("FirebaseService", "Creating and showing notification...")
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(2, notification)
     }
+
+
 }

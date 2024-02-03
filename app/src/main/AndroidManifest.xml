@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -20,8 +19,16 @@
 
         <service
             android:name=".FirebaseService"
-            android:exported="false"/>
-        <service android:name=".MyForegroundService" />
+            android:exported="false" />
+
+        <receiver
+            android:name=".PopupReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mobile.emergencysos.POPUP_ACTION" />
+            </intent-filter>
+        </receiver>
+
 
         <activity
             android:name=".MainActivity"
@@ -30,18 +37,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity
             android:name=".VerifyActivity"
-            android:exported="false">
+            android:exported="false" />
 
-        </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="false" >
+            android:exported="false" />
 
-        </activity>
     </application>
 
 </manifest>
