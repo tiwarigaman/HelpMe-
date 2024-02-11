@@ -50,10 +50,14 @@ class MainActivity : AppCompatActivity() {
 
     private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
+            // Remove the existing ValueEventListener to avoid multiple listeners
+            databaseReference.removeEventListener(valueEventListener)
+
             // Handle the database change, and show the custom notification
             databaseReference.addValueEventListener(valueEventListener)
         }
     }
+
 
     @SuppressLint("InlinedApi")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -61,12 +65,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val serviceIntent = Intent(this, FirebaseService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent)
-        } else {
-            startService(serviceIntent)
-        }
+//        val serviceIntent = Intent(this, FirebaseService::class.java)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            startForegroundService(serviceIntent)
+//        } else {
+//            startService(serviceIntent)
+//        }
     }
 
     @SuppressLint("LaunchActivityFromNotification")
