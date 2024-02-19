@@ -31,39 +31,33 @@ import com.google.firebase.database.ValueEventListener
 class MainActivity : AppCompatActivity() {
     private val databaseReference: DatabaseReference =
         FirebaseDatabase.getInstance().getReference("notification")
-    private val valueEventListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-            // Handle data changes
-            val value = dataSnapshot.getValue(String::class.java)
-
-            // Trigger custom notification
-            if (value != null) {
-                Toast.makeText(this@MainActivity, value, Toast.LENGTH_LONG).show()
-                showCustomNotification(value)
-            }
-        }
-
-        override fun onCancelled(databaseError: DatabaseError) {
-            // Handle errors
-        }
-    }
-
-    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            // Remove the existing ValueEventListener to avoid multiple listeners
-            databaseReference.removeEventListener(valueEventListener)
-
-            // Handle the database change, and show the custom notification
-            databaseReference.addValueEventListener(valueEventListener)
-        }
-    }
-
 
     @SuppressLint("InlinedApi")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        databaseReference.addValueEventListener(object :  ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+//                val value = dataSnapshot.getValue(String::class.java)
+
+                if (snapshot.hasChild("content")){
+                    val newValue : String = snapshot.child("content").value.toString()
+
+                    Toast.makeText(this@MainActivity, newValue, Toast.LENGTH_LONG).show()
+                    showCustomNotification(newValue)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
 
 //        val serviceIntent = Intent(this, FirebaseService::class.java)
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -146,13 +140,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        // Unregister the BroadcastReceiver and ValueEventListener to avoid memory leaks
-        unregisterReceiver(receiver)
-        databaseReference.removeEventListener(valueEventListener)
-
-        super.onDestroy()
-    }
+//    override fun onDestroy() {
+//        // Unregister the BroadcastReceiver and ValueEventListener to avoid memory leaks
+//        unregisterReceiver(receiver)
+//        databaseReference.removeEventListener(valueEventListener)
+//
+//        super.onDestroy()
+//    }
 
 }
 

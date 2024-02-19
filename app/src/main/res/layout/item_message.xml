@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/myLay"
+    android:padding="8dp">
+    <TextView
+        android:id="@+id/senderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Aman"
+        android:textColor="#FFF7F7"
+        android:textSize="12sp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi,I'm xyz"
+        android:textColor="#FFF0F0"
+        android:textSize="16sp"
+        tools:ignore="HardcodedText,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/timestampTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="12:44am"
+        android:textColor="#FFE4E4"
+        android:textSize="10sp"
+        tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
+
+</LinearLayout>

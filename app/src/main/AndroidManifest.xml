@@ -21,16 +21,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmergencySoS"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity3"
-            android:exported="false" />
-        <!-- AIzaSyAb1VSTz-qYt_9r6Iw5SnfRzUhGmIaytCw -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAcZWc7XPSpbbJdwyFZ4QQ12pj40M55bak" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/baseline_notification_24" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity
-            android:name=".MainActivity2"
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".signUpWithEmail"
+            android:exported="false" />
+        <activity
+            android:name=".LoginWithEmail"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,8 +56,23 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".welcome"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity3"
+            android:exported="false" /> <!-- AIzaSyAb1VSTz-qYt_9r6Iw5SnfRzUhGmIaytCw -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAcZWc7XPSpbbJdwyFZ4QQ12pj40M55bak" />
+
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".VerifyActivity"
             android:exported="false" />

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/format">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Threat Level"
+        android:textColor="@color/customDialogTitleColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        tools:ignore="HardcodedText" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/customDialogTitleColor"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioEmergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency Situation"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/radioASAP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Need Help ASAP"
+            tools:ignore="HardcodedText" />
+
+        <!-- Add more radio buttons as needed -->
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/customDialogButtonColor"
+        android:textColor="@color/customDialogButtonTextColor"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

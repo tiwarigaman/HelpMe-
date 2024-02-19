@@ -230,6 +230,8 @@
         <item>+263 (Zimbabwe)</item>
     </string-array>
     <string name="country_code_prompt">Select Country Code</string>
+    <string name="login"><u>Login</u></string>
+    <string name="signup"><u>SignUp</u></string>
 
 
 </resources>
