@@ -69,14 +69,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text=" SignIn"
-            android:textColor="#4557BC"
+            android:text=" Login"
+            android:textColor="#002637"
             android:textSize="14sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText,TextContrastCheck" />
     </LinearLayout>
 
-    <Button
+    <TextView
         android:id="@+id/signUpGo"
         style="@style/AppButtonStyle"
         android:layout_width="150dp"

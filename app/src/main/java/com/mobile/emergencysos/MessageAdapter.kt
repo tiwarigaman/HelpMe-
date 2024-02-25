@@ -21,6 +21,7 @@ class MessageAdapter(private var messages: List<Message>) : RecyclerView.Adapter
         val timestampTextView: TextView = itemView.findViewById(R.id.timestampTextView)
         val myLay : LinearLayout = itemView.findViewById(R.id.myLay)
     }
+
     @SuppressLint("NotifyDataSetChanged")
     fun setMessages(newMessages: List<Message>) {
         messages = newMessages
@@ -60,20 +61,8 @@ class MessageAdapter(private var messages: List<Message>) : RecyclerView.Adapter
             Gravity.START // Left for others
         }
 
-//        val layoutParams: LinearLayout.LayoutParams = if ((message.senderId == FirebaseAuth.getInstance().currentUser?.uid.toString()) ) {
-//            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-//                leftMargin = 70
-//            }
-//        } else {
-//            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-//                rightMargin = 70
-//            }
-//        }
-//
-//        holder.messageTextView.layoutParams = layoutParams
-
         //Apply gravity to the message text
-        if (message.senderId != "system"){
+        if (message.senderId != "system" && holder.messageTextView.text!="Anonymous quit this session"){
             holder.myLay.gravity = gravity
             holder.timestampTextView.gravity = gravity
         }else{

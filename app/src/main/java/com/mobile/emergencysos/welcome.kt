@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,8 +27,8 @@ class welcome : AppCompatActivity() {
         chatBtn.isVisible = false
         database = FirebaseDatabase.getInstance().reference.child("request")
 
-
         val stringValue = intent.getStringExtra("requestKey").toString()
+        val otherUser = intent.getStringExtra("uid").toString()
         Log.d("doubleHEHE",stringValue)
 
         if(stringValue.isNotEmpty()){
@@ -47,9 +48,18 @@ class welcome : AppCompatActivity() {
                                     "helper" to FirebaseAuth.getInstance().currentUser?.uid.toString()
                                 )
                                 database.child(stringValue).updateChildren(map)
+                                val intent = Intent(this@welcome,MainActivity2::class.java)
+                                intent.putExtra("requestKey", stringValue)
+                                intent.putExtra("uid", otherUser)
+                                startActivity(intent)
+                                finish()
+                            }else{
+                                Toast.makeText(this@welcome,"The request is accepted by someone",
+                                    Toast.LENGTH_LONG).show()
+                                val intent = Intent(this@welcome,HomeActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }
-
-
                         }
                         builder.setNegativeButton("No"){_,_ ->
                             val intent = Intent(this@welcome,HomeActivity::class.java)
@@ -57,7 +67,6 @@ class welcome : AppCompatActivity() {
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                             finish()
                         }
-
                         builder.show()
                     }
                 }
@@ -67,28 +76,6 @@ class welcome : AppCompatActivity() {
                 }
             })
 
-            database.child(stringValue).
-                addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.child("confirm").getValue(Boolean::class.java)==true &&
-                            snapshot.hasChild("helper")){
-                            chatBtn.isVisible = true
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-            })
-
-
-            chatBtn.setOnClickListener {
-                val intent = Intent(this,ChatActivity::class.java)
-                intent.putExtra("requestKey", stringValue)
-                startActivity(intent)
-                finish()
-            }
         }
-
     }
 }

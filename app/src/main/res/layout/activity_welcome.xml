@@ -13,10 +13,10 @@
         android:id="@+id/chatKaro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go To Chat"
-        android:textColor="#ff3333"
         android:backgroundTint="@color/white"
-        tools:ignore="HardcodedText" />
+        android:text="Go To Location"
+        android:textColor="#ff3333"
+        tools:ignore="HardcodedText,TextContrastCheck" />
 
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.mobile.emergencysos
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,9 +25,11 @@ import java.util.UUID
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
+    private lateinit var hasQuit : DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var stringValue :String
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,34 +39,38 @@ class ChatActivity : AppCompatActivity() {
 
 
         val receivedIntent = intent
-        val stringValue = receivedIntent.getStringExtra("requestKey").toString()
+        stringValue = receivedIntent.getStringExtra("requestKey").toString()
         database = FirebaseDatabase.getInstance().reference.child("request").child(stringValue)
             .child("chat")
 
+        hasQuit = FirebaseDatabase.getInstance().reference.child("request").child(stringValue)
+        findViewById<AppCompatImageView>(R.id.btnBack).setOnClickListener{
+            finish()
+        }
         findViewById<AppCompatImageView>(R.id.btnCancel).setOnClickListener {
-            Toast.makeText(this@ChatActivity,"he he",Toast.LENGTH_SHORT).show()
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Confirmation")
             builder.setMessage("Are you sure you want to skip to help?")
             builder.setPositiveButton("Yes") { _, _ ->
                 val map = mapOf(
                     "confirm" to false,
-                    "complete" to true
+                    "complete" to false,
+                    "hasQuit" to true
                 )
                 FirebaseDatabase.getInstance().reference.child("request").child(stringValue).updateChildren(map)
-                FirebaseDatabase.getInstance().reference.child("request").child(stringValue).child("helper").removeValue()
+                val currentUser = auth.currentUser
+                val message = Message(currentUser?.uid.toString(), "Anonymous quit this session", System.currentTimeMillis())
+                database.push().setValue(message)
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()
             }
             builder.setNegativeButton("No"){_,_ ->
-
+                //do nothing...
             }
             builder.show()
         }
-
-
         // Set up RecyclerView
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -76,12 +83,12 @@ class ChatActivity : AppCompatActivity() {
 
         // Example: Sending a message
         findViewById<FrameLayout>(R.id.sendButton).setOnClickListener {
-            if(findViewById<EditText>(R.id.messageUser).text.toString().isNotEmpty()){
+            if(findViewById<EditText>(R.id.messageUser).text.toString().isNotEmpty()
+                && findViewById<EditText>(R.id.messageUser).text.toString().trim().isNotEmpty()){
                 sendMessage(findViewById<EditText>(R.id.messageUser).text.toString())
             }else{
                 Toast.makeText(this,"Can't send empty message",Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
@@ -104,7 +111,6 @@ class ChatActivity : AppCompatActivity() {
                         val message = childSnapshot.getValue(Message::class.java)
                         message?.let { messages.add(it) }
                     }
-
                 }else {
                     // Push a default message when no messages exist
                     val defaultMessage = Message("system", "Anonymous is here to help you" +

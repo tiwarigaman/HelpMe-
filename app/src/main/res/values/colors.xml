@@ -11,9 +11,9 @@
     <color name="colorGreen">#00FF00</color>
     <color name="colorRed">#FF0000</color>
 
-    <color name="customDialogTitleColor">#ff3333</color>
+    <color name="customDialogTitleColor">#ff2d00</color>
     <color name="customDialogBackgroundColor">#FFFFFF</color>
-    <color name="customDialogButtonColor">#ff3333</color>
+    <color name="customDialogButtonColor">#ff2d00</color>
     <color name="customDialogButtonTextColor">#FFFFFF</color>
-    <color name="colorAccent">#ff3333</color>
+    <color name="colorAccent">#ff2d00</color>
 </resources>

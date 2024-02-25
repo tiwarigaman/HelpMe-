@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Emergency SoS</string>
+    <string name="app_name">HelpMe!</string>
     <string-array name="country_codes">
         <item>+91 (India)</item>
         <item>+1 (United States)</item>
@@ -232,6 +232,8 @@
     <string name="country_code_prompt">Select Country Code</string>
     <string name="login"><u>Login</u></string>
     <string name="signup"><u>SignUp</u></string>
+    <string name="continue_without_identity"><u>Continue without identity?</u></string>
+    <string name="tap_for_urgent_help">Tap for urgent help. Activate SOS now. Your safety matters. Immediate assistance at your fingertips.</string>
 
 
 </resources>

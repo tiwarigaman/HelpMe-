@@ -58,13 +58,6 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-
-//        val serviceIntent = Intent(this, FirebaseService::class.java)
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            startForegroundService(serviceIntent)
-//        } else {
-//            startService(serviceIntent)
-//        }
     }
 
     @SuppressLint("LaunchActivityFromNotification")

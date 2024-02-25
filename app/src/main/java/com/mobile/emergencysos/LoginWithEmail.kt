@@ -22,6 +22,18 @@ class LoginWithEmail : AppCompatActivity() {
         setContentView(R.layout.activity_login_with_email)
         val emailEditText : EditText = findViewById(R.id.loginEmail)
         val passwordEditText : EditText = findViewById(R.id.loginPass)
+
+
+//        val recieved = intent.getStringExtra("requestKey").toString()
+////        Log.d("MainActivity",intent.getStringExtra("requestKey").toString())
+//        if (recieved.isNotEmpty() && recieved != "null"){
+//            val intent = Intent(this, ChatActivity::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//            intent.putExtra("requestKey",recieved)
+//            startActivity(intent)
+//            finish()
+//        }
+
         progressDialog = ProgressDialog(this)
         database = FirebaseDatabase.getInstance().reference.child("exception")
 
@@ -31,7 +43,7 @@ class LoginWithEmail : AppCompatActivity() {
         }
 
 
-        findViewById<Button>(R.id.loginButton).setOnClickListener {
+        findViewById<TextView>(R.id.loginButton).setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
             if (email.isNotEmpty() and password.isNotEmpty()){
@@ -54,7 +66,7 @@ class LoginWithEmail : AppCompatActivity() {
                     if (auth.currentUser!!.isEmailVerified) {
                         // Login successful, user is verified
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this,HomeActivity::class.java))
+                        startActivity(Intent(this,AdhaarActivity::class.java))
                         finish()
                         progressDialog?.dismiss()
                     } else {
