@@ -75,6 +75,14 @@ class HomeActivity : AppCompatActivity() {
         findViewById<FrameLayout>(R.id.helpMe).setOnClickListener {
             showConfirmationDialog()
         }
+        // Check if the button needs to be clicked programmatically
+        simulateButtonClick()
+    }
+
+    private fun simulateButtonClick() {
+        // Simulate a button click programmatically
+        val button = findViewById<FrameLayout>(R.id.helpMe)
+        button.performClick()
     }
 
     @SuppressLint("SetTextI18n")
@@ -233,7 +241,6 @@ class HomeActivity : AppCompatActivity() {
 //            put("data", dataObj) // Include data in the 'data' field
 //        }
 
-
         val dataObj = JSONObject().apply {
             put("title", "Emergency")
             put("body", "Someone needs help in your area!")
@@ -256,7 +263,7 @@ class HomeActivity : AppCompatActivity() {
         Log.d("FCM", "Project ID: $projectId")
         val request = Request.Builder()
             .url("https://fcm.googleapis.com/v1/projects/$projectId/messages:send")
-            .addHeader("Authorization", "Bearer ya29.a0AcM612ybTE1EwUHruDkfZZymcYfHBIHa_AY71yY1k_7d1iKnK_7RUXjuLMIHmy7-p_bz62NEJaiwvpy0KpdXxvMCyk7IHygNSWeHyDpRWEEStnhEcjgyZYJsENUsuM3FKZ7xGew_v1rjEB5OwMI7c6MnX4HNHhBvbkNg3U0qaCgYKASASARESFQHGX2Mi3vMY4hvgrUcRezfdcjnArw0175")
+            .addHeader("Authorization", "Bearer ya29.a0AcM612wHmpdvhvTk7YIamJd1sXQTunBiuz9_obvwDYq9aUINsCLCAP4yv2Sylgl-37ifYxUsSxUdtNyyUN-VMQnCcK_2G25jSn4AIWkxDJw0BIs7ZZJwISt5pHfM3qVqW0SINylkLrh29qHmUzuVe6Hgb3j4BJa_maFf5LHraCgYKAQgSARESFQHGX2Mi0IFQM3e9KVhRg1JEmn06cA0175")
             .post(requestBody)
             .build()
 
