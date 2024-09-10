@@ -17,8 +17,13 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.messaging.messaging
 import okhttp3.Call
 import okhttp3.Callback
@@ -30,6 +35,7 @@ import okhttp3.Response
 import okio.IOException
 import org.json.JSONObject
 
+@Suppress("SameParameterValue")
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
@@ -40,7 +46,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var statusTextView3: TextView
 
     private val handler = Handler(Looper.getMainLooper())
-
     private val delayMillis : Long = 5000
 
     @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables")
@@ -106,7 +111,7 @@ class HomeActivity : AppCompatActivity() {
                 progressBar2.visibility = View.VISIBLE
                 updateDatabase(requestKey)
 //                showCustomNotification("Someone needs help in your area", requestKey.toString())
-                showFCMNotification("Someone needs help in your area", requestKey.toString())
+                showFCMNotification(selectedThreatLevel, requestKey.toString())
             }
             dialog.dismiss()
         }
@@ -169,30 +174,89 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun sendNotificationToToken(token : String, key: String) {
-        val notificationObject = JSONObject().apply {
+//    private fun sendNotificationToToken(token : String, key: String) {
+//        val notificationObject = JSONObject().apply {
+//            put("title", "Emergency")
+//            put("body", "Someone need help in your area!")
+//            put("android_channel_id", "id")
+//            put("click_action", "FLAG_UPDATE_CURRENT")
+//        }
+//
+//        val datObj = JSONObject().apply {
+//            put("requestKey",key)
+//            put("uid",FirebaseAuth.getInstance().currentUser?.uid.toString())
+//        }
+//
+//        val json = JSONObject().apply {
+//            put("to", token)
+//            put("notification", notificationObject)
+//            put("data", datObj) // Empty data object, as we already include data in the notification
+//
+//        }
+//
+//        val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
+//        val projectId = FirebaseApp.getInstance().options.projectId
+//        Log.d("FCM", "Project ID: $projectId")
+//        val request = Request.Builder()
+//            .url("https://fcm.googleapis.com/v1/projects/$projectId/messages:send")
+//            .addHeader("Authorization", "Bearer AAAASZeQF-4:APA91bG4DKeJKFUAyo9fSOywzXJgzIeo05XF2vONGOD-WdNSDXlNVvyXBQoShbESGojiJ7AwVtX5CcIYtSKHaVqIcBL19rhErbFI6k7CT1TW-axBiZYtf4IqqnJdCmXj-NF95-a0KBUs")
+//            .post(requestBody)
+//            .build()
+//
+//        val client = OkHttpClient()
+//        client.newCall(request).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//                Log.e("FCM", "Failed to send notification: ${e.message}")
+//            }
+//
+//            override fun onResponse(call: Call, response: Response) {
+//                Log.d("FCM", "Notification sent successfully $call " +
+//                        "\n$response")
+//            }
+//        })
+//    }
+
+    private fun sendNotificationToToken(token: String, key: String) {
+//        val notificationObject = JSONObject().apply {
+//            put("title", "Emergency")
+//            put("body", "Someone need help in your area!")
+//        }
+//
+//        val dataObj = JSONObject().apply {
+//            put("requestKey", key)
+//            put("uid", FirebaseAuth.getInstance().currentUser?.uid.toString())
+//        }
+//
+//        val json = JSONObject().apply {
+//            put("to", token)
+//            put("notification", notificationObject)
+//            put("data", dataObj) // Include data in the 'data' field
+//        }
+
+
+        val dataObj = JSONObject().apply {
             put("title", "Emergency")
-            put("body", "Someone need help in your area!")
-            put("android_channel_id", "id")
+            put("body", "Someone needs help in your area!")
+            put("requestKey", key)
+            put("uid", FirebaseAuth.getInstance().currentUser?.uid.toString())
             put("click_action", "FLAG_UPDATE_CURRENT")
         }
 
-        val datObj = JSONObject().apply {
-            put("requestKey",key)
-            put("uid",FirebaseAuth.getInstance().currentUser?.uid.toString())
+        val messageObj = JSONObject().apply {
+            put("token", token)
+            put("data", dataObj)
         }
 
         val json = JSONObject().apply {
-            put("to", token)
-            put("notification", notificationObject)
-            put("data", datObj) // Empty data object, as we already include data in the notification
-
+            put("message", messageObj)
         }
 
         val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
+        val projectId = FirebaseApp.getInstance().options.projectId
+        Log.d("FCM", "Project ID: $projectId")
         val request = Request.Builder()
-            .url("https://fcm.googleapis.com/fcm/send")
-            .addHeader("Authorization", "Bearer AAAASZeQF-4:APA91bG4DKeJKFUAyo9fSOywzXJgzIeo05XF2vONGOD-WdNSDXlNVvyXBQoShbESGojiJ7AwVtX5CcIYtSKHaVqIcBL19rhErbFI6k7CT1TW-axBiZYtf4IqqnJdCmXj-NF95-a0KBUs")
+            .url("https://fcm.googleapis.com/v1/projects/$projectId/messages:send")
+            .addHeader("Authorization", "Bearer ya29.a0AcM612ybTE1EwUHruDkfZZymcYfHBIHa_AY71yY1k_7d1iKnK_7RUXjuLMIHmy7-p_bz62NEJaiwvpy0KpdXxvMCyk7IHygNSWeHyDpRWEEStnhEcjgyZYJsENUsuM3FKZ7xGew_v1rjEB5OwMI7c6MnX4HNHhBvbkNg3U0qaCgYKASASARESFQHGX2Mi3vMY4hvgrUcRezfdcjnArw0175")
             .post(requestBody)
             .build()
 

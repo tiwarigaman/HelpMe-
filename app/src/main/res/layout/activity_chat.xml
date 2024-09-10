@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendButton"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="Autofill,HardcodedText,LabelFor,RelativeOverlap,TextFields,TouchTargetSizeCheck,TextContrastCheck" />
+        tools:ignore="Autofill,HardcodedText,LabelFor,RelativeOverlap,TextFields,TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize" />
 
 
     <FrameLayout

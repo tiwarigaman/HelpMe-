@@ -6,13 +6,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.auth.FirebaseAuth
+
 
 class GetStartActivity : AppCompatActivity() {
 
@@ -21,6 +22,24 @@ class GetStartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_start)
+
+        val i = intent
+        val extras = i.extras
+        Log.d("myValue",extras.toString())
+        if (extras != null) {
+            val key = extras.getString("requestKey")
+            val uid = extras.getString("uid")
+            Log.d("GetStartActivity","$key \n $uid")
+            if (!key.isNullOrEmpty() && !uid.isNullOrEmpty()) {
+                val intent =  Intent(this,welcome::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.putExtra("requestKey",key)
+                intent.putExtra("uid",uid)
+                startActivity(intent)
+                finish()
+                Log.d("GetStartActivity","$key \n $uid")
+            }
+        }
 
         findViewById<TextView>(R.id.helpMeButton).setOnClickListener {
             checkAndRequestNotificationPermission(this)
