@@ -15,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
@@ -80,9 +81,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun simulateButtonClick() {
-        // Simulate a button click programmatically
-        val button = findViewById<FrameLayout>(R.id.helpMe)
-        button.performClick()
+        
     }
 
     @SuppressLint("SetTextI18n")
@@ -140,6 +139,19 @@ class HomeActivity : AppCompatActivity() {
         val fcmTokens: MutableList<String> = mutableListOf()
         val database = FirebaseDatabase.getInstance().reference
         val usersRef = database.child("users")
+        var key = "abc"
+        usersRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild("key")){
+                    key = snapshot.child("key").value.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
         usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -152,7 +164,7 @@ class HomeActivity : AppCompatActivity() {
 
                 fcmTokens.forEach { token ->
 //                    sendNotificationToToken(message, requestKey, token)
-                    sendNotificationToToken(token, requestKey)
+                    sendNotificationToToken(token, requestKey,key)
                 }
             }
 
@@ -224,7 +236,7 @@ class HomeActivity : AppCompatActivity() {
 //        })
 //    }
 
-    private fun sendNotificationToToken(token: String, key: String) {
+    private fun sendNotificationToToken(token: String, key: String,myKey: String) {
 //        val notificationObject = JSONObject().apply {
 //            put("title", "Emergency")
 //            put("body", "Someone need help in your area!")
@@ -263,7 +275,7 @@ class HomeActivity : AppCompatActivity() {
         Log.d("FCM", "Project ID: $projectId")
         val request = Request.Builder()
             .url("https://fcm.googleapis.com/v1/projects/$projectId/messages:send")
-            .addHeader("Authorization", "Bearer ya29.a0AcM612wHmpdvhvTk7YIamJd1sXQTunBiuz9_obvwDYq9aUINsCLCAP4yv2Sylgl-37ifYxUsSxUdtNyyUN-VMQnCcK_2G25jSn4AIWkxDJw0BIs7ZZJwISt5pHfM3qVqW0SINylkLrh29qHmUzuVe6Hgb3j4BJa_maFf5LHraCgYKAQgSARESFQHGX2Mi0IFQM3e9KVhRg1JEmn06cA0175")
+            .addHeader("Authorization", "Bearer $myKey")
             .post(requestBody)
             .build()
 
@@ -271,11 +283,18 @@ class HomeActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("FCM", "Failed to send notification: ${e.message}")
+                runOnUiThread {
+                    Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 Log.d("FCM", "Notification sent successfully $call " +
-                        "\n$response")
+                        "\nResponse code: ${response.code}" +
+                        "\nResponse body: ${response.body?.string()}")
+                runOnUiThread {
+                    Toast.makeText(applicationContext, "${response.code}", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
