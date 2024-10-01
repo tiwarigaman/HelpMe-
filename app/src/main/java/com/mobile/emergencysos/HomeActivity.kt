@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private val delayMillis : Long = 5000
 
-    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables")
+    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "LogNotTimber")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -259,6 +259,7 @@ class HomeActivity : AppCompatActivity() {
             put("requestKey", key)
             put("uid", FirebaseAuth.getInstance().currentUser?.uid.toString())
             put("click_action", "FLAG_UPDATE_CURRENT")
+
         }
 
         val messageObj = JSONObject().apply {
